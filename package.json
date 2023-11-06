@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha"
+    "lint": "eslint --ext .ts --quiet --ignore-path .gitignore .",
+    "test": "mocha",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -28,8 +30,8 @@
     "through2": "^4.0.2"
   },
   "devDependencies": {
-    "@rdfjs/types": "^1.1.0",
     "@rdfjs-elements/formats-pretty": "^0.6.4",
+    "@rdfjs/types": "^1.1.0",
     "@tpluscode/eslint-config": "^0.4.4",
     "@types/chai": "^4.3.9",
     "@types/mocha": "^10.0.3",
@@ -40,13 +42,20 @@
     "c8": "^8.0.1",
     "chai": "^4.3.10",
     "eslint-import-resolver-typescript": "^3.6.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
     "mocha": "^10.2.0",
     "mocha-chai-jest-snapshot": "^1.1.4",
     "sinon": "^17.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
-  "mocha":{
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix --quiet"
+    ]
+  },
+  "mocha": {
     "extension": "ts",
     "loader": "ts-node/esm"
   }
