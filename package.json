@@ -1,0 +1,53 @@
+{
+  "name": "rdf-merge-stream",
+  "version": "0.0.0",
+  "description": "Stream transform which fetches and merges multiple RDF resources/documents",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zazuko/rdf-merge-stream.git"
+  },
+  "keywords": [
+    "rdf",
+    "stream",
+    "merge",
+    "resource",
+    "fetch"
+  ],
+  "author": "Zazuko GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zazuko/rdf-merge-stream/issues"
+  },
+  "homepage": "https://github.com/zazuko/rdf-merge-stream#readme",
+  "dependencies": {
+    "through2": "^4.0.2"
+  },
+  "devDependencies": {
+    "@rdfjs/types": "^1.1.0",
+    "@rdfjs-elements/formats-pretty": "^0.6.4",
+    "@tpluscode/eslint-config": "^0.4.4",
+    "@types/chai": "^4.3.9",
+    "@types/mocha": "^10.0.3",
+    "@types/through2": "^2.0.40",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "@zazuko/env-node": "^1.0.1",
+    "c8": "^8.0.1",
+    "chai": "^4.3.10",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "mocha": "^10.2.0",
+    "mocha-chai-jest-snapshot": "^1.1.4",
+    "sinon": "^17.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "mocha":{
+    "extension": "ts",
+    "loader": "ts-node/esm"
+  }
+}
