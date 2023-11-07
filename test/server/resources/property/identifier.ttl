@@ -1,0 +1,12 @@
+PREFIX ex: <http://example.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix code: <https://code.described.at/>
+
+[
+  code:imports <./shared> ;
+] .
+
+<identifier>
+  sh:minLength 3 ;
+  sh:and ( ex:required-property )
+.

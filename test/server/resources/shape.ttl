@@ -1,0 +1,16 @@
+PREFIX code: <https://code.described.at/>
+PREFIX schema: <http://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+[
+  code:imports <property/identifier> ;
+] .
+
+<>
+  a sh:NodeShape ;
+  sh:property <property/identifier> ;
+.
+
+<property/identifier>
+  sh:path schema:identifier ;
+.

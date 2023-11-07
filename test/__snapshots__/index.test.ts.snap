@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`rdf-merge-stream imports remote resources from files 1`] = `
+"@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <http://schema.org/> .
+
+<http://example.org/required-property> sh:minCount 1 ;
+	sh:maxCount 1 .
+
+<http://localhost:6666/property/identifier> sh:minLength 3 ;
+	sh:and (
+		<http://example.org/required-property>
+	) ;
+	sh:path schema:identifier .
+
+<> a sh:NodeShape ;
+	sh:property <http://localhost:6666/property/identifier> .
+
+"
+`;
+
+exports[`rdf-merge-stream imports remote resources from http 1`] = `
+"@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <http://schema.org/> .
+
+<http://example.org/required-property> sh:minCount 1 ;
+	sh:maxCount 1 .
+
+<http://localhost:6666/property/identifier> sh:minLength 3 ;
+	sh:and (
+		<http://example.org/required-property>
+	) ;
+	sh:path schema:identifier .
+
+<http://localhost:6666/shape> a sh:NodeShape ;
+	sh:property <http://localhost:6666/property/identifier> .
+
+"
+`;
+
 exports[`rdf-merge-stream merges file stream by relative path 1`] = `
 "@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <http://schema.org/> .
