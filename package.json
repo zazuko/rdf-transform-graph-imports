@@ -10,6 +10,13 @@
     "prepare": "husky install",
     "release": "changeset publish"
   },
+  "files": [
+    "CHANGELOG.md",
+    "*.js",
+    "*.d.ts",
+    "lib/*.js",
+    "lib/*.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zazuko/rdf-merge-stream.git"
