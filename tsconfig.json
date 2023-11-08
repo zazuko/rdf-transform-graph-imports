@@ -4,6 +4,7 @@
     "module": "NodeNext",
     "target": "ES2022",
     "strict": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "skipLibCheck": true
   }
 }
