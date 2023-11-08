@@ -5,6 +5,7 @@
     "target": "ES2022",
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true
   }
 }

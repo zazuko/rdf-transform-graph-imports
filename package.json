@@ -8,6 +8,7 @@
     "lint": "eslint --ext .ts --quiet --ignore-path .gitignore .",
     "test": "mocha",
     "prepare": "husky install",
+    "prepack": "tsc",
     "release": "changeset publish"
   },
   "files": [
