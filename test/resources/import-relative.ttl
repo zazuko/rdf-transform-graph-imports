@@ -1,3 +1,4 @@
+PREFIX shape: <http://example.com/shape>
 PREFIX code: <https://code.described.at/>
 PREFIX schema: <http://schema.org/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
@@ -6,11 +7,11 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
   code:imports <./property/identifier> ;
 ] .
 
-<>
+shape:
   a sh:NodeShape ;
-  sh:property <#property/identifier> ;
+  sh:property shape:\#property-identifier ;
 .
 
-<#property/identifier>
+shape:\#property-identifier
   sh:path schema:identifier ;
 .

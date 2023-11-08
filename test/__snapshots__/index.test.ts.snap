@@ -42,17 +42,17 @@ exports[`rdf-merge-stream merges file stream by relative path 1`] = `
 "@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <http://schema.org/> .
 
-<http://example.org/required-property> sh:minCount 1 ;
+<http://example.com/required-property> sh:minCount 1 ;
 	sh:maxCount 1 .
 
-<#property/identifier> sh:minLength 3 ;
+<http://example.com/shape#property-identifier> sh:minLength 3 ;
 	sh:and (
-		<http://example.org/required-property>
+		<http://example.com/required-property>
 	) ;
 	sh:path schema:identifier .
 
-<> a sh:NodeShape ;
-	sh:property <#property/identifier> .
+<http://example.com/shape> a sh:NodeShape ;
+	sh:property <http://example.com/shape#property-identifier> .
 
 "
 `;

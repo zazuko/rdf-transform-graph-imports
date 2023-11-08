@@ -1,4 +1,3 @@
-import * as url from 'url'
 import * as http from 'http'
 import chai, { expect } from 'chai'
 import type { Dataset } from '@zazuko/env/lib/Dataset.js'
@@ -24,7 +23,7 @@ describe('rdf-merge-stream', () => {
   it('merges file stream by relative path', async () => {
     // given
     const path = new URL('./resources/import-relative.ttl', import.meta.url)
-    const root = rdf.fromFile(url.fileURLToPath(path.toString()))
+    const root = rdf.fromFile(path)
 
     // when
     const merged = await rdf.dataset().import(root.pipe(transform(rdf, {
@@ -38,7 +37,7 @@ describe('rdf-merge-stream', () => {
   it('imports remote resources from files', async () => {
     // given
     const path = new URL('./resources/import-remote.ttl', import.meta.url)
-    const root = rdf.fromFile(url.fileURLToPath(path.toString()))
+    const root = rdf.fromFile(path)
 
     // when
     const merged = await rdf.dataset().import(root.pipe(transform(rdf, {
