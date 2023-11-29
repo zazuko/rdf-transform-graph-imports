@@ -4,6 +4,8 @@ This package provides a stream transform which replaces import statements with c
 
 ## Installation
 
+Install the package itself and a RDF/JS environment which provides the factories [`NamespaceFactory`](https://github.com/rdfjs-base/namespace), [`FsUtilsFactory`](https://github.com/zazuko/rdf-utils-fs), and [`FetchFactory`](https://github.com/rdfjs-base/fetch-lite). If unsure, try [`@zazuko/env-node`](https://npm.im/@zazuko/env-node).
+
 ```bash
 npm install rdf-transform-graph-imports @zazuko/env-node
 ```
