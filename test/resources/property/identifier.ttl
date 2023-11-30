@@ -5,6 +5,7 @@ prefix code: <https://code.described.at/>
 
 [
   code:imports <./shared> ;
+  code:extension "ttl" ;
 ] .
 
 property:identifier

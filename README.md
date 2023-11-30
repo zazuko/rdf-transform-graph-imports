@@ -28,7 +28,7 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
 
 [
     # relative URIs are relative to the document itself
-    code:imports <./property/identifier> ;
+    code:imports <./property/identifier.ttl> ;
     code:imports <http://example.com/required-property> ;
 ] .
 
@@ -77,3 +77,22 @@ const dataset = await rdf.dataset().import(stream.pipe(imports(rdf, {
     basePath: '/path/to/shape.ttl'
 })))
 ```
+
+### Reusing imports for local and remote documents
+
+You may face the situation that you want to import the same file from a local file and a remote resource
+but do not publish the extension in the remote resource's URL. In this case, you must add a `code:extension`
+property to the import.
+
+```turtle
+PREFIX code: <https://code.described.at/>
+
+[
+    code:imports <./property/identifier> ;
+    code:extension "ttl" ;
+] .
+```
+
+If the above is a local file, e.g. `/path/to/shape.ttl`, the import will be resolved as `/path/to/property/identifier.ttl`.
+
+If the above is a remote resource, e.g. `https://example.com/shape`, the import will be resolved as `https://example.com/property/identifier.ttl`.

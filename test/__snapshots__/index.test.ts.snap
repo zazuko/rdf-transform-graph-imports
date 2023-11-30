@@ -4,17 +4,17 @@ exports[`rdf-merge-stream imports remote resources from files 1`] = `
 "@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <http://schema.org/> .
 
-<http://example.org/required-property> sh:minCount 1 ;
-	sh:maxCount 1 .
-
-<http://localhost:6666/property/identifier> sh:minLength 3 ;
-	sh:and (
-		<http://example.org/required-property>
-	) ;
-	sh:path schema:identifier .
-
 <> a sh:NodeShape ;
 	sh:property <http://localhost:6666/property/identifier> .
+
+<http://localhost:6666/property/identifier> sh:path schema:identifier ;
+	sh:minLength 3 ;
+	sh:and (
+		<http://example.org/required-property>
+	) .
+
+<http://example.org/required-property> sh:minCount 1 ;
+	sh:maxCount 1 .
 
 "
 `;
@@ -23,17 +23,17 @@ exports[`rdf-merge-stream imports remote resources from http 1`] = `
 "@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <http://schema.org/> .
 
-<http://example.org/required-property> sh:minCount 1 ;
-	sh:maxCount 1 .
-
-<http://localhost:6666/property/identifier> sh:minLength 3 ;
-	sh:and (
-		<http://example.org/required-property>
-	) ;
-	sh:path schema:identifier .
-
 <http://localhost:6666/shape> a sh:NodeShape ;
 	sh:property <http://localhost:6666/property/identifier> .
+
+<http://localhost:6666/property/identifier> sh:path schema:identifier ;
+	sh:minLength 3 ;
+	sh:and (
+		<http://example.org/required-property>
+	) .
+
+<http://example.org/required-property> sh:minCount 1 ;
+	sh:maxCount 1 .
 
 "
 `;
@@ -42,17 +42,17 @@ exports[`rdf-merge-stream merges file stream by relative path 1`] = `
 "@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <http://schema.org/> .
 
-<http://example.com/required-property> sh:minCount 1 ;
-	sh:maxCount 1 .
-
-<http://example.com/shape#property-identifier> sh:minLength 3 ;
-	sh:and (
-		<http://example.com/required-property>
-	) ;
-	sh:path schema:identifier .
-
 <http://example.com/shape> a sh:NodeShape ;
 	sh:property <http://example.com/shape#property-identifier> .
+
+<http://example.com/shape#property-identifier> sh:path schema:identifier ;
+	sh:minLength 3 ;
+	sh:and (
+		<http://example.com/required-property>
+	) .
+
+<http://example.com/required-property> sh:minCount 1 ;
+	sh:maxCount 1 .
 
 "
 `;

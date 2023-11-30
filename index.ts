@@ -1,4 +1,5 @@
 import through2 from 'through2'
+import type { AnyPointer } from 'clownface'
 import type { Quad } from '@rdfjs/types'
 import { resolveImport } from './lib/path.js'
 import Environment from './lib/env.js'
@@ -11,24 +12,37 @@ interface Options {
 function transform(env: Environment, { basePath }: Options = {}) {
   const code = env.namespace('https://code.described.at/')
 
+  const importStatements: AnyPointer = env.clownface()
+
   return through2.obj(async function (quad: Quad, _, done) {
-    if (quad.predicate.equals(code.imports)) {
-      try {
-        const importTarget = resolveImport(quad.object, basePath)
+    if (quad.predicate.equals(code.imports) || quad.predicate.equals(code.extension)) {
+      importStatements.dataset.add(quad)
+      return done()
+    }
+
+    done(null, quad)
+  }, async function (done) {
+    try {
+      const imports = importStatements.has(code.imports)
+        .map(Import => {
+          const importPath = Import.out(code.imports).term!
+          const extension = Import.out(code.extension).value
+          return resolveImport(importPath, { basePath, extension })
+        })
+
+      for (const importTarget of imports) {
         const importStream = fetchImport(env, importTarget)
           .pipe(transform(env, { basePath: importTarget }))
 
         for await (const importedQuad of importStream) {
           this.push(importedQuad)
         }
-
-        return done()
-      } catch (e) {
-        return done(e)
       }
+    } catch (e: unknown) {
+      this.destroy(new Error(`Failed to import: ${e}`))
     }
 
-    done(null, quad)
+    done()
   })
 }
 

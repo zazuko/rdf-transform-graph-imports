@@ -2,7 +2,12 @@ import * as url from 'url'
 import type { Term } from '@rdfjs/types'
 import isURI from 'is-uri'
 
-export function resolveImport(importNode: Term, basePath: string | URL | undefined) {
+interface Options {
+  basePath?: string | URL
+  extension?: string
+}
+
+export function resolveImport(importNode: Term, { basePath, extension }: Options = {}) {
   if (importNode.termType !== 'NamedNode') {
     throw new Error(`Import target must be a NamedNode, got ${importNode.termType}`)
   }
@@ -12,5 +17,7 @@ export function resolveImport(importNode: Term, basePath: string | URL | undefin
   }
 
   const base = typeof basePath === 'string' ? url.pathToFileURL(basePath) : basePath
-  return url.fileURLToPath(new URL(importNode.value + '.ttl', base))
+
+  const filePath = extension ? `${importNode.value}.${extension}` : importNode.value
+  return url.fileURLToPath(new URL(filePath, base))
 }
