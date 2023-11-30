@@ -1,23 +1,15 @@
-import { Readable, PassThrough } from 'readable-stream'
+import { Readable } from 'readable-stream'
 import Environment from './env.js'
 
-export default function (env: Environment, importTarget: string | URL) {
+export default async function (env: Environment, importTarget: string | URL) {
   if (typeof importTarget === 'string') {
     return env.fromFile(importTarget)
   }
 
-  const remoteStream = new PassThrough({ objectMode: true })
+  const response = await env.fetch(importTarget.toString())
+  if (!response.ok) {
+    throw new Error(`Failed to fetch: ${response.statusText}`)
+  }
 
-  env.fetch(importTarget.toString())
-    .then(response => {
-      return response.quadStream() as unknown as Promise<Readable>
-    })
-    .then(quadStream => {
-      quadStream.pipe(remoteStream)
-    })
-    .catch(error => {
-      remoteStream.emit('error', error)
-    })
-
-  return remoteStream
+  return response.quadStream() as unknown as Promise<Readable>
 }
