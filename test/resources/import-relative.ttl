@@ -5,6 +5,7 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
 
 [
   code:imports <./property/identifier> ;
+  code:extension "ttl" ;
 ] .
 
 shape:
