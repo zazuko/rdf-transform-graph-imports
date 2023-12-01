@@ -23,12 +23,10 @@ describe('rdf-merge-stream', () => {
   it('merges file stream by relative path', async () => {
     // given
     const path = new URL('./resources/import-relative.ttl', import.meta.url)
-    const root = rdf.fromFile(path)
+    const root = rdf.fromFile(path, { implicitBaseIRI: true })
 
     // when
-    const merged = await rdf.dataset().import(root.pipe(transform(rdf, {
-      basePath: path,
-    })))
+    const merged = await rdf.dataset().import(root.pipe(transform(rdf)))
 
     // then
     expect(await turtle(merged)).toMatchSnapshot()
@@ -40,9 +38,7 @@ describe('rdf-merge-stream', () => {
     const root = rdf.fromFile(path)
 
     // when
-    const merged = await rdf.dataset().import(root.pipe(transform(rdf, {
-      basePath: path,
-    })))
+    const merged = await rdf.dataset().import(root.pipe(transform(rdf)))
 
     // then
     expect(await turtle(merged)).toMatchSnapshot()
@@ -68,6 +64,26 @@ describe('rdf-merge-stream', () => {
     // then
     await expect(rdf.dataset().import(root.pipe(transform(rdf))))
       .to.be.eventually.rejectedWith('Failed to fetch: Not Found')
+  })
+
+  it('fails when local import is not a valid file: URI', async () => {
+    // given
+    const path = new URL('./resources/import-relative.ttl', import.meta.url)
+    const root = rdf.fromFile(path)
+
+    // then
+    await expect(rdf.dataset().import(root.pipe(transform(rdf))))
+      .to.be.eventually.rejectedWith('Import target must be a valid URI')
+  })
+
+  it('fails when import is literal', async () => {
+    // given
+    const path = new URL('./resources/import-literal.ttl', import.meta.url)
+    const root = rdf.fromFile(path)
+
+    // then
+    await expect(rdf.dataset().import(root.pipe(transform(rdf))))
+      .to.be.eventually.rejectedWith('Import target must be a NamedNode')
   })
 })
 

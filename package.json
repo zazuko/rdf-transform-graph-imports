@@ -36,7 +36,6 @@
   },
   "homepage": "https://github.com/zazuko/rdf-merge-stream#readme",
   "dependencies": {
-    "is-uri": "^1.2.6",
     "readable-stream": "3 - 4",
     "through2": "^4.0.2"
   },
