@@ -59,6 +59,16 @@ describe('rdf-merge-stream', () => {
     // then
     expect(await turtle(merged)).toMatchSnapshot()
   })
+
+  it('fails when remote resource is not found', async () => {
+    // given
+    const response = await rdf.fetch('http://localhost:6666/invalid-import')
+    const root = await response.quadStream() as unknown as Readable
+
+    // then
+    await expect(rdf.dataset().import(root.pipe(transform(rdf))))
+      .to.be.eventually.rejectedWith('Failed to fetch: Not Found')
+  })
 })
 
 async function turtle(merged: Dataset) {

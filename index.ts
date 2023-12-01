@@ -31,8 +31,8 @@ function transform(env: Environment, { basePath }: Options = {}) {
         })
 
       for (const importTarget of imports) {
-        const importStream = fetchImport(env, importTarget)
-          .pipe(transform(env, { basePath: importTarget }))
+        const fetchStream = await fetchImport(env, importTarget)
+        const importStream = fetchStream.pipe(transform(env, { basePath: importTarget }))
 
         for await (const importedQuad of importStream) {
           this.push(importedQuad)
