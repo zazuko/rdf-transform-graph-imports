@@ -1,0 +1,6 @@
+PREFIX code: <https://code.described.at/>
+
+[
+  code:imports "/property/identifier" ;
+  code:extension "ttl" ;
+] .

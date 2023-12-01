@@ -5,11 +5,7 @@ import { resolveImport } from './lib/path.js'
 import Environment from './lib/env.js'
 import fetchImport from './lib/fetchImport.js'
 
-interface Options {
-  basePath?: string | URL
-}
-
-function transform(env: Environment, { basePath }: Options = {}) {
+function transform(env: Environment) {
   const code = env.namespace('https://code.described.at/')
 
   const importStatements: AnyPointer = env.clownface()
@@ -27,12 +23,12 @@ function transform(env: Environment, { basePath }: Options = {}) {
         .map(Import => {
           const importPath = Import.out(code.imports).term!
           const extension = Import.out(code.extension).value
-          return resolveImport(importPath, { basePath, extension })
+          return resolveImport(importPath, { extension })
         })
 
       for (const importTarget of imports) {
         const fetchStream = await fetchImport(env, importTarget)
-        const importStream = fetchStream.pipe(transform(env, { basePath: importTarget }))
+        const importStream = fetchStream.pipe(transform(env))
 
         for await (const importedQuad of importStream) {
           this.push(importedQuad)

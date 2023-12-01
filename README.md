@@ -51,7 +51,14 @@ it through the transform. The transform will output a stream of quads where `cod
 are removed and replaced with the imported graphs. The latter can also contain import statements which
 will be recursively resolved.
 
+It is required that all imports are absolute URIs in the upstream. If you parse document's yourself,
+make sure to provide a base IRI so that relative URIs are resolved correctly. The easiest way is to
+use the libraries as shown below.
+
 ### From remote resource
+
+The `rdf.fetch` method ensures that relative URIs in the response are parsed against the URL of the
+document itself by default.
 
 ```javascript
 import rdf from '@zazuko/env-node'
@@ -65,17 +72,17 @@ const dataset = await rdf.dataset().import(stream.pipe(imports(rdf)))
 
 ### From local file
 
-When streaming a local file, it may be necessary to provide a `basePath` to resolve relative URIs.
+When streaming a local file, you must explicitly provide a base IRI to the parser or use the option
+to use the file's path as base IRI. This is not the default behaviour because many prior users relied
+on the parser to return relative URIs as-is.
 
 ```javascript
 import rdf from '@zazuko/env-node'
 import imports from 'rdf-transform-graph-imports'
 
-const stream = rdf.fromFile('/path/to/shape.ttl')
+const stream = rdf.fromFile('/path/to/shape.ttl', { implicitBaseIRI: true })
 
-const dataset = await rdf.dataset().import(stream.pipe(imports(rdf, {
-    basePath: '/path/to/shape.ttl'
-})))
+const dataset = await rdf.dataset().import(stream.pipe(imports(rdf)))
 ```
 
 ### Reusing imports for local and remote documents

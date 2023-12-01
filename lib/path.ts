@@ -1,23 +1,27 @@
 import * as url from 'url'
 import type { Term } from '@rdfjs/types'
-import isURI from 'is-uri'
 
 interface Options {
-  basePath?: string | URL
   extension?: string
 }
 
-export function resolveImport(importNode: Term, { basePath, extension }: Options = {}) {
+export function resolveImport(importNode: Term, { extension }: Options = {}) {
   if (importNode.termType !== 'NamedNode') {
-    throw new Error(`Import target must be a NamedNode, got ${importNode.termType}`)
+    throw new Error(`Import target must be a NamedNode. Got ${importNode.termType}`)
   }
 
-  if (isURI(importNode.value)) {
-    return new URL(importNode.value)
+  try {
+    const targetUri = new URL(importNode.value)
+    if (targetUri.protocol === 'http:') {
+      return targetUri
+    }
+
+    if (extension) {
+      targetUri.pathname += `.${extension}`
+    }
+
+    return url.fileURLToPath(targetUri)
+  } catch (e: unknown) {
+    throw new Error(`Import target must be a valid URI. Got: ${importNode.value}`)
   }
-
-  const base = typeof basePath === 'string' ? url.pathToFileURL(basePath) : basePath
-
-  const filePath = extension ? `${importNode.value}.${extension}` : importNode.value
-  return url.fileURLToPath(new URL(filePath, base))
 }
