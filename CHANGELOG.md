@@ -1,5 +1,12 @@
 # rdf-transform-graph-imports
 
+## 0.2.2
+
+### Patch Changes
+
+- 9996328: Log raw error when path resolution fails
+- 3888a4c: Fix error when resolving HTTPS imports
+
 ## 0.2.1
 
 ### Patch Changes
