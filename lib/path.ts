@@ -6,6 +6,8 @@ interface Options {
   extension?: string
 }
 
+const PROTOCOL_PATTERN = /^https?:/i
+
 export function resolveImport(importNode: Term, { extension }: Options = {}) {
   if (importNode.termType !== 'NamedNode') {
     throw new Error(`Import target must be a NamedNode. Got ${importNode.termType}`)
@@ -13,7 +15,7 @@ export function resolveImport(importNode: Term, { extension }: Options = {}) {
 
   try {
     const targetUri = new URL(importNode.value)
-    if (targetUri.protocol === 'http:') {
+    if (PROTOCOL_PATTERN.test(targetUri.protocol)) {
       return targetUri
     }
 
