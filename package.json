@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --ext .ts --quiet --ignore-path .gitignore .",
     "test": "mocha",
-    "prepare": "husky install",
+    "prepare": "husky install; patch-package",
     "prepack": "tsc",
     "release": "changeset publish"
   },
@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/zazuko/rdf-merge-stream#readme",
   "dependencies": {
+    "anylogger": "^1.0.11",
     "readable-stream": "3 - 4",
     "through2": "^4.0.2"
   },
@@ -67,6 +68,7 @@
     "lint-staged": "^15.0.2",
     "mocha": "^10.2.0",
     "mocha-chai-jest-snapshot": "^1.1.4",
+    "patch-package": "^8.0.0",
     "sinon": "^17.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
