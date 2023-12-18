@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --ext .ts --quiet --ignore-path .gitignore .",
     "test": "mocha",
-    "prepare": "husky install; patch-package",
+    "prepare": "husky install",
     "prepack": "tsc",
     "release": "changeset publish"
   },
@@ -68,7 +68,6 @@
     "lint-staged": "^15.0.2",
     "mocha": "^10.2.0",
     "mocha-chai-jest-snapshot": "^1.1.4",
-    "patch-package": "^8.0.0",
     "sinon": "^17.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"

@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "moduleResolution": "Node",
+    "module": "ES2022",
     "target": "ES2022",
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "declaration": true
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   }
 }

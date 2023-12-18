@@ -1,12 +1,10 @@
 import through2 from 'through2'
 import type { AnyPointer } from 'clownface'
 import type { Quad } from '@rdfjs/types'
-import anylogger from 'anylogger'
 import { resolveImport } from './lib/path.js'
 import Environment from './lib/env.js'
 import fetchImport from './lib/fetchImport.js'
-
-const log = anylogger('rdf-transform-graph-imports')
+import { log } from './lib/log.js'
 
 function transform(env: Environment) {
   const code = env.namespace('https://code.described.at/')

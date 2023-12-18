@@ -1,5 +1,6 @@
 import * as url from 'url'
 import type { Term } from '@rdfjs/types'
+import { log } from './log.js'
 
 interface Options {
   extension?: string
@@ -22,6 +23,7 @@ export function resolveImport(importNode: Term, { extension }: Options = {}) {
 
     return url.fileURLToPath(targetUri)
   } catch (e: unknown) {
+    log.error(e)
     throw new Error(`Import target must be a valid URI. Got: ${importNode.value}`)
   }
 }
