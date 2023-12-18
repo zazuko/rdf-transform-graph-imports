@@ -1,5 +1,11 @@
 # rdf-transform-graph-imports
 
+## 0.2.1
+
+### Patch Changes
+
+- 4ca309b: Add log when import is resolved
+
 ## 0.2.0
 
 ### Minor Changes
