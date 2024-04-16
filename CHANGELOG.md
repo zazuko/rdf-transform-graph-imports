@@ -1,5 +1,11 @@
 # rdf-transform-graph-imports
 
+## 0.2.3
+
+### Patch Changes
+
+- 797c97e: Make the `FsUtilsFactory` optional. An exception will be thrown when an enviornment does not provide that factory and a filesystem import is loaded
+
 ## 0.2.2
 
 ### Patch Changes
