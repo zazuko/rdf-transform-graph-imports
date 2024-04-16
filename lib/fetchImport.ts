@@ -3,6 +3,10 @@ import Environment from './env.js'
 
 export default async function (env: Environment, importTarget: string | URL) {
   if (typeof importTarget === 'string') {
+    if (!('fromFile' in env)) {
+      throw new Error('Importing from file is not supported')
+    }
+
     return env.fromFile(importTarget, { implicitBaseIRI: true })
   }
 
