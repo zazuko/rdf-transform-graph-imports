@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zazuko/rdf-merge-stream.git"
+    "url": "git+https://github.com/zazuko/rdf-transform-graph-imports.git"
   },
   "keywords": [
     "rdf",
@@ -32,9 +32,9 @@
   "author": "Zazuko GmbH",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zazuko/rdf-merge-stream/issues"
+    "url": "https://github.com/zazuko/rdf-transform-graph-imports/issues"
   },
-  "homepage": "https://github.com/zazuko/rdf-merge-stream#readme",
+  "homepage": "https://github.com/zazuko/rdf-transform-graph-imports#readme",
   "dependencies": {
     "anylogger": "^1.0.11",
     "readable-stream": "3 - 4",
