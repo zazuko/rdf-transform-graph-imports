@@ -1,6 +1,6 @@
 {
   "name": "rdf-transform-graph-imports",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Stream transform which fetches and merges multiple RDF resources/documents",
   "main": "index.js",
   "type": "module",

@@ -1,5 +1,11 @@
 # rdf-transform-graph-imports
 
+## 0.2.4
+
+### Patch Changes
+
+- d2ceaa3: Wrong URLs in package.json
+
 ## 0.2.3
 
 ### Patch Changes
